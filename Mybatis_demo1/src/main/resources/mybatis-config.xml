@@ -17,6 +17,6 @@
     </environments>
     <!--引入映射文件-->
     <mappers>
-        <mapper resource="org/mybatis/example/BlogMapper.xml"/>
+        <mapper resource="mappers/UserMapper.xml"/>
     </mappers>
 </configuration>

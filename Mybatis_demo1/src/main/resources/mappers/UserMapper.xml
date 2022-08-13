@@ -5,8 +5,8 @@
 <mapper namespace="com.itxie.mybatis.mapper.UserMapper">
 
     <!--int insertUsder();-->
-    <insert id="intsertUser">
-
+    <insert id="insertUser">
+        insert into table_user values (null,'admin02','123456',23,'女','123457@qq.com')
     </insert>
 
 </mapper>
