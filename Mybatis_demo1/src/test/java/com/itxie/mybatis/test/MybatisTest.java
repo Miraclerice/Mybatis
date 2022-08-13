@@ -6,11 +6,15 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.Test;
-
 import java.io.IOException;
 import java.io.InputStream;
 
 public class MybatisTest {
+    /**
+     * sqlSession默认不自动提交事务，若要自动提交事务
+     * 可以使用SqlSessionFactory.openSession(true);
+     * @throws IOException
+     */
     @Test
     public void testMybatis() throws IOException {
         //加载核心配置文件
@@ -20,7 +24,7 @@ public class MybatisTest {
         //获取sqlSesionFactory
         SqlSessionFactory sqlSessionFactory = sqlSessionFactoryBuilder.build(is);
         //获取sqlSession
-        SqlSession sqlSession = sqlSessionFactory.openSession();
+        SqlSession sqlSession = sqlSessionFactory.openSession(true);
         //获取mapper对象
         UserMapper mapper = sqlSession.getMapper(UserMapper.class);
 
@@ -29,6 +33,6 @@ public class MybatisTest {
         System.out.println("result:" + result);
 
         //提交事务
-        sqlSession.commit();
+        //sqlSession.commit();
     }
 }
