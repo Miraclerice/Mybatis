@@ -9,4 +9,29 @@
         insert into table_user values (null,'admin02','123456',23,'女','123457@qq.com')
     </insert>
 
+    <!--void updateUser();-->
+    <update id="updateUser">
+        update table_user set username = '张三' where id = 6
+    </update>
+
+    <!--void deleteUser();-->
+    <delete id="deleteUser">
+        delete from table_user where id = 7
+    </delete>
+
+    <!--User getUserById();-->
+    <!--
+       查询功能的标签必须设置resultType或resultMap
+       resultType：设置默认的映射关系
+       resultMap:设置自定义的映射关系
+    -->
+    <select id="getUserById" resultType="com.itxie.mybatis.pojo.User">
+        select * from table_user where id = 2
+    </select>
+
+    <!--List<User> getAllUser();-->
+    <select id="getAllUser" resultType="com.itxie.mybatis.pojo.User">
+        select * from table_user
+    </select>
+
 </mapper>
