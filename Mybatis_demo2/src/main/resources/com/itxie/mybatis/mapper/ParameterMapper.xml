@@ -16,4 +16,25 @@
         select * from table_user
     </select>
 
+    <!--User checkLogin(String username,String password);-->
+    <select id="checkLogin" resultType="User">
+        <!--select * from table_user where username = #{arg0} and password = #{arg1}-->
+        select * from table_user where username = '${param1}' and password = '${param2}'
+    </select>
+
+    <!--User checkLoginByMap(Map<String,Object> map);-->
+    <select id="checkLoginByMap" resultType="User">
+        select * from table_user where username = #{username} and password = #{password}
+    </select>
+
+    <!--int insertUser(User user);-->
+    <insert id="insertUser">
+        insert into table_user values (null,#{username},#{password},#{age},#{sex},#{email})
+    </insert>
+
+    <!--User checkLoginByParam(@Param("username") String username,@Param("password") String password);-->
+    <select id="checkLoginByParam" resultType="User">
+        select * from table_user where username = #{param1} and password = #{password} <!--username与param1值一致-->
+    </select>
+
 </mapper>
