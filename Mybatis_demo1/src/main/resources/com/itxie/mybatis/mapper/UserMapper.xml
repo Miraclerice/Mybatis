@@ -30,7 +30,7 @@
     </select>
 
     <!--List<User> getAllUser();-->
-    <select id="getAllUser" resultType="com.itxie.mybatis.pojo.User">
+    <select id="getAllUser" resultType="User">
         select * from table_user
     </select>
 
