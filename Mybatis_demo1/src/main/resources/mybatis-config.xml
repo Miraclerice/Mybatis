@@ -3,18 +3,60 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-    <!--配置连接数据库的环境-->
+
+    <properties resource="jdbc.properties"/>
+
+    <!--配置多个连接数据库的环境
+        属性：
+        default：设置默认使用的环境id
+-->
     <environments default="development">
+        <!--
+            environment:配置某个具体环境
+            属性：
+                id:表示连接数据库的环境分唯一标识，不能重复
+        -->
         <environment id="development">
+            <!--
+                transactionManger:设置事务管理方式
+                属性：
+                type="JDBC|MANAGED"
+                JDBC:表示当前环境中，在执行SQL时，使用的是JDBC中原生的事务管理方式，事务的提交或回滚需要手动处理
+                MANAGED：被管理，例如spring ； 它从不提交或回滚一个连接，而是让容器来管理事务的整个生命周期（比如 JEE 应用服务器的上下文）
+            -->
             <transactionManager type="JDBC"/>
+            <!--
+                type:设置数据源类型
+                    type="[UNPOOLED|POOLED|JNDI]"）
+                    POOLED：表示使用数据库连接池缓存数据连接
+                    UNPOOLED：表示不使用数据库连接池
+                    JNDI：表示使用上下文中的数据源
+            -->
             <dataSource type="POOLED">
+                <!--设置连接数据库的驱动-->
                 <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
-                <property name="url" value="jdbc:mysql://localhost:3306/mybatis?useSSL=false&amp;allowPublicKeyRetrieval=true&amp;serverTimezone=UTC"/>
+                <!--设置连接数据库的连接地址-->
+                <property name="url"
+                          value="jdbc:mysql://localhost:3306/mybatis?useSSL=false&amp;allowPublicKeyRetrieval=true&amp;serverTimezone=UTC"/>
+                <!--设置连接数据库的用户名-->
                 <property name="username" value="root"/>
+                <!--设置连接数据库的密码-->
                 <property name="password" value="123456"/>
             </dataSource>
         </environment>
+
+        <environment id="test">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc,driver}"/>
+                <property name="url" value="${jdbc.url}"/><!--jdbc:mysql://localhost:3306/mybatis?useSSL=false&amp;allowPublicKeyRetrieval=true&amp;serverTimezone=UTC-->
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
     </environments>
+
+
     <!--引入映射文件-->
     <mappers>
         <mapper resource="mappers/UserMapper.xml"/>
