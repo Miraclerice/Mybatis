@@ -60,7 +60,7 @@ public class CacheMapperTest {
             System.out.println(mapper2.getEmpByEid(1));
             sqlSession2.close();
 
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
